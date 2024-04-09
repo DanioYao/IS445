@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distribution of License Types by State</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body>
+  <h1>Distribution of License Types by State</h1>
+  <div id="myChartContainer"></div>
+  <script>
+    const chartData = {
+      labels: [],
+      datasets: [{
+        label: 'License Count',
+        data: [],
+        backgroundColor: []
+      }]
+    };
 
+    // Loop through your JSON data and populate chartData
+    const jsonData = JSON.parse('[Replace with your JSON data]'); // Replace with actual JSON data
+    jsonData.datasets['data-a8d06f529c9929af5a432d8d0550f02e'].forEach(entry => {
+      chartData.labels.push(entry.State);
+      chartData.datasets[0].data.push(entry.Count);
+      // Add colors based on License Type (replace with your logic)
+      chartData.datasets[0].backgroundColor.push('rgba(255, 99, 132, 0.2)'); // Example color
+    });
+
+    const ctx = document.getElementById('myChartContainer').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: chartData,
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  </script>
+</body>
+</html>
